@@ -1,6 +1,6 @@
 # Full Stack Template
 
-The essential full stack template for any hackathon — just the basics.
+The essential full stack template for any hackathon, just the basics.
 
 ## What is this?
 
