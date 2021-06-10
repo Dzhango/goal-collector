@@ -13,3 +13,7 @@ For the backend, this uses a barebones express setup, and the frontend uses a ba
 ## Backend Docs
 
 All routes are documented with [Postman](https://documenter.getpostman.com/view/12316934/TVsoFprj)
+
+## Goal Collector App
+
+Collection of all the SMART goals you ever had
