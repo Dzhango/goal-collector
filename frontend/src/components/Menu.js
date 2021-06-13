@@ -39,6 +39,9 @@ export default function MenuNav() {
         <MenuItem onClick={handleClose}>
             <Link color="inherit">My Account </Link>
         </MenuItem>
+        <MenuItem onClick={handleClose}>
+            <Link color="inherit">Sign Up</Link>
+        </MenuItem>
       </Menu>
     </div>
   );
