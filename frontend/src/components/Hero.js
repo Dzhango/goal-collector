@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
         backgroundPosition: "center bottom",
+        backgroundSize: "cover",
         color: "white",
     },
     heroButtons: {
@@ -21,7 +22,7 @@ export default function Hero(){
     const classes = useStyles();
     return(
         <div className={classes.heroContent}>
-          <Container maxWidth="md">
+          <Container maxWidth="sm">
             <Typography variant="h5" align="center" color="standard" paragraph>
             “To stand up straight with your shoulders back is 
             to accept the terrible responsibility of life, with eyes wide open. 
