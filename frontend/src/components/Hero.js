@@ -1,5 +1,6 @@
 import {Typography, Container, Button, makeStyles} from '@material-ui/core';
-
+import {Link} from "react-router-dom";
+  
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -30,9 +31,11 @@ export default function Hero(){
             into the realities of habitable order." - Jordan Peterson
             </Typography>
             <div className={classes.heroButtons}>
-                <Button variant="contained" color="primary" justify="center">
-                    Create New Goal
-                </Button>
+                <Link to="/newgoal">
+                    <Button variant="contained" color="primary" justify="center">
+                    Create New Goal 
+                    </Button>
+                </Link>
             </div>
           </Container>
         </div>

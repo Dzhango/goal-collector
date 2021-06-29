@@ -5,7 +5,10 @@ import Footer from './components/Footer.js'
 import Hero from './components/Hero.js'
 import GoalGrid from './components/GoalGrid.js'
 import NewGoalForm from './components/newGoalForm.js';
-
+import About from './components/About.js';
+import SignUp from './components/SignUp.js';
+import SignIn from './components/SignIn.js';
+import Feed from './components/Feed.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,20 +20,32 @@ export default function App() {
 
   return (
     <Router>
-      {/* <React.Fragment> */}
-        {/* <CssBaseline /> */}
-        {/* <Header/> */}
+      <React.Fragment>
+        <CssBaseline />
         <Header/>
-        <Route path='/' exact>
-          <Hero/>
-          <GoalGrid/>
-        </Route>
-        <Route path='/newgoal' exact>
-          <NewGoalForm/>
-        </Route>
+        <Switch>
+          <Route path='/' exact>
+            <Hero/>
+            <GoalGrid/>
+          </Route>
+          <Route path='/about'>
+            <About/>
+          </Route>
+          <Route path='/newgoal'>
+            <NewGoalForm/>
+          </Route>
+          <Route path='/signup'>
+            <SignUp/>
+          </Route>
+          <Route path='/signin'>
+            <SignIn/>
+          </Route>
+          <Route path='/:id/feed'>
+            <Feed id=":id" />
+          </Route>
+        </Switch>
         <Footer/>
-        {/* <NewGoalForm/> */}
-      {/* </React.Fragment> */}
+      </React.Fragment>
     </Router>
   );
 }

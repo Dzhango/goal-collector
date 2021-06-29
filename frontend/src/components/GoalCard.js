@@ -31,7 +31,7 @@ export default function GoalCard(){
             />
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Goal Name
+                    Goal Title
                             </Typography>
                 <Typography>
                     This is where goal description goes

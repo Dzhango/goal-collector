@@ -4,7 +4,13 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from "@material-ui/core";
+// import {Link} from "@material-ui/core";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 export default function MenuNav() {
@@ -29,19 +35,19 @@ export default function MenuNav() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>
-            <Link color="inherit">Home </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-            <Link color="inherit">About </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-            <Link color="inherit">My Account </Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-            <Link color="inherit">Sign Up</Link>
-        </MenuItem>
+      >     
+          <Link to="/" color="inherit">
+            <MenuItem onClick={handleClose}>Home</MenuItem>
+          </Link>
+          <Link to="/about" color="inherit">
+            <MenuItem onClick={handleClose}>About</MenuItem>
+          </Link>
+          <Link to="/signin" color="inherit">
+            <MenuItem onClick={handleClose}>My Account</MenuItem>
+          </Link>
+          <Link to="/signup" color="inherit">
+            <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+          </Link>
       </Menu>
     </div>
   );
