@@ -19,13 +19,15 @@ router.post('/', async function (req, res, next) {
 
     //create new user
     const user = new User({
-        name: req.body.name,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword,
     });
 
     try{
         const savedUser = await user.save();
+        //load the user's page 
         res.send(savedUser);
     } catch(err){
         res.status(400).send(err);

@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    lastName: {
         type: String,
         required: true,
         min: 6,
