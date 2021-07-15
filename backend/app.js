@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 var indexRouter = require('./routes/index');
 var signupRouter = require('./routes/signUp');
 var loginRouter = require('./routes/login');
-var postRouter = require("./routes/posts")
+var goalRouter = require("./routes/goals")
 const dotenv = require("dotenv");
 var cors = require('cors')
 
@@ -25,8 +25,8 @@ app.use(cors());
 app.use('/home', indexRouter);
 // app.use("/", express.static('build'));
 app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
-app.use('/posts', postRouter);
+app.use('/signin', loginRouter);
+app.use('/goals', goalRouter);
 
 
 

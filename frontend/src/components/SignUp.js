@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from "react-router-dom"
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+	Redirect,
+} from "react-router-dom";
+
 const axios = require('axios');
 
 const useStyles = makeStyles((theme) => ({
@@ -34,43 +41,44 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function axiosCall() {
-	axios.post('http://localhost:8000/signup', {
-		firstName: 'Justin',
-		lastName: 'Cordero',
-		email: "jcorder@gmail.com",
-		password: 'deeznuts'
-	})
-	.then(function (response) {
-		console.log(response);
-	})
-	.catch(function (error) {
-		console.log(error);
-	});
-}
-
 const headers = {
 	'Content-Type': 'application/json',
 	"Access-Control-Allow-Origin": "*",
-  }
+}
 
-export default function SignUp() {
+export default function SignUp(props) {
+
+	const [isLoading, setIsLoading] = useState(false);
+
 	const classes = useStyles();
-	useEffect(() => {
-		axios.post('http://localhost:8000/signup', {
-			firstName: "Adamae",
-			lastName: "Guilllemette",
-			email: "adam.gui@gmail.com",
-			password: "deezlove"
-		}, 
-		{headers:headers})
-		.then(function (response) {
-			console.log(response.body);
-		})
-		.catch(function (error) {
-			console.log(error.response);
+
+	function handleSubmit(event) {
+		event.preventDefault();
+		
+		const params = {
+			firstName: event.target[0].value,
+			lastName: event.target[2].value,
+			email: event.target[4].value,
+			password: event.target[6].value,
+			goals: []
+		}
+
+		axios.post('http://localhost:8000/signup', 
+			params, { headers: headers 
+			}).then(function (response) {
+			
+			setIsLoading(true);
+			props.setToken(response.data);
+
+			}).catch(function (error) {
+				alert(error.response.data);
 		});
-	});
+	}
+
+	if (isLoading){
+		return <Redirect to="/" />
+	}
+
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
@@ -81,7 +89,7 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Sign up
         </Typography>
-				<form className={classes.form} noValidate>
+				<form className={classes.form} Validate onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<TextField
@@ -147,7 +155,6 @@ export default function SignUp() {
 						</Grid>
 					</Grid>
 				</form>
-				<Button onClick={axiosCall}>Click me</Button> 
 			</div>
 		</Container>
 	);

@@ -1,7 +1,6 @@
 import {Typography, Container, Button, makeStyles} from '@material-ui/core';
 import {Link} from "react-router-dom";
   
-
 const useStyles = makeStyles((theme) => ({
     heroContent: {
         backgroundColor: theme.palette.background.paper,
@@ -21,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function Hero(){
     const classes = useStyles();
+
+    //make a put request here
+    //create goals
     return(
         <div className={classes.heroContent}>
           <Container maxWidth="sm">

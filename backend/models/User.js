@@ -30,6 +30,16 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    goals: [
+        { Title: String, 
+          Desc: String, 
+          Measure: String,
+          Attainable: String, 
+          Values: String,
+          Deadline: String, 
+          Img: String
+        }
+    ]
 });
 
 module.exports = mongoose.model("User", userSchema);

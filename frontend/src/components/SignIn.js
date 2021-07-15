@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {useState, useEffect } from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +14,20 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from "react-router-dom";
 
+
+const axios = require('axios');
+
+const headers = {
+	'Content-Type': 'application/json',
+	"Access-Control-Allow-Origin": "*",
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,8 +60,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleSubmit(event) {
+		event.preventDefault();
+		
+		const params = {
+			email: event.target[0].value,
+			password: event.target[2].value
+		}
+
+		axios.post('http://localhost:8000/signin', 
+			params, { headers: headers 
+			}).then(function (response) {
+			
+			setIsLoading(true);
+			props.setToken(response.data);
+
+			}).catch(function (error) {
+				alert(error.response.data);
+		});
+  }
+
+  if (isLoading){
+		return <Redirect to="/" />
+	}
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -60,7 +100,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} Validate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"

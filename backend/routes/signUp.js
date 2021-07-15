@@ -3,16 +3,21 @@ var router = express.Router();
 var User = require("../models/User.js");
 const {registerValidation} = require("../validation.js");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 router.post('/', async function (req, res, next) {
 
     //validation
     const { error } = registerValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) {
+        return res.status(400).send("Incorrect first or last name");
+    }
     
-    //check if user exists
+    //check if user existss
     const emailExists = await User.findOne({email: req.body.email})
-    if(emailExists) return res.status(400).send("Email already exists"); 
+    if(emailExists){ 
+        return res.status(400).send("Email already exists");
+    } 
 
     //Hash the password
     const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
@@ -26,9 +31,15 @@ router.post('/', async function (req, res, next) {
     });
 
     try{
-        const savedUser = await user.save();
-        //load the user's page 
-        res.send(savedUser);
+        // const savedUser = await user.save();
+        user.save()
+            .then( function(response) {
+                 //load the user's page
+                // const user = User.findOne({email: req.body.email});
+                const token = jwt.sign({_id: response._id}, process.env.TOKEN_SECRET); 
+                res.status(200).header('auth-token', token).send(token);
+            })
+
     } catch(err){
         res.status(400).send(err);
     }

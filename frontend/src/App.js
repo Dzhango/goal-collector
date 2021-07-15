@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './components/Header.js'
 import Footer from './components/Footer.js'
@@ -9,47 +9,38 @@ import About from './components/About.js';
 import SignUp from './components/SignUp.js';
 import SignIn from './components/SignIn.js';
 import Feed from './components/Feed.js';
+import UserPage from './components/UserPage.js'; 
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Link
 } from "react-router-dom";
-const axios = require('axios');
-
-// const api = axios.create({
-// 	baseURL: "http://localhost:8000/"
-// })
 
 
 export default function App() {
-	// useEffect(() => {
-	// 	api.post('/home').then(res => {
-	// 		console.log(res.data);
-	// 	})
-	// });
-
+	const [token, setToken] = useState("");
+	
 	return (
 		<Router>
 			<React.Fragment>
 				<CssBaseline />
-				<Header />
+				<Header /> 
 				<Switch>
 					<Route path='/' exact>
-						<Hero />
-						<GoalGrid />
+						<UserPage/>
 					</Route>
 					<Route path='/about'>
 						<About />
 					</Route>
 					<Route path='/newgoal'>
-						<NewGoalForm />
+						<NewGoalForm token={token}/>
 					</Route>
 					<Route path='/signup'>
-						<SignUp />
+						<SignUp setToken={setToken}/>
 					</Route>
 					<Route path='/signin'>
-						<SignIn />
+						<SignIn setToken={setToken}/>
 					</Route>
 					<Route path='/:id/feed'>
 						<Feed id=":id" />
