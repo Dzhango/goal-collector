@@ -37,7 +37,7 @@ router.post('/', async function (req, res, next) {
                  //load the user's page
                 // const user = User.findOne({email: req.body.email});
                 const token = jwt.sign({_id: response._id}, process.env.TOKEN_SECRET); 
-                res.status(200).header('auth-token', token).send(token);
+                res.status(200).header('auth-token', token).json({token: token, login: req.body.email});
             })
 
     } catch(err){

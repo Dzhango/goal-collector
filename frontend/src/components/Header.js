@@ -18,8 +18,8 @@ export default function Header(){
             <Toolbar>
                 <Menu/>
               {/* <CameraIcon className={classes.icon} /> */}
-              <Typography variant="h6" color="inherit" noWrap>
-                <Typography className={classes.header} variant="h5" color="inherit">
+              <Typography variant="h5" color="inherit" noWrap>
+                <Typography className={classes.header} color="inherit">
                     SMART Goals Library
                 </Typography>
               </Typography>

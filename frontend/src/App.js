@@ -19,7 +19,7 @@ import {
 
 
 export default function App() {
-	const [token, setToken] = useState("");
+	const [user, setUser] = useState({});
 	
 	return (
 		<Router>
@@ -34,13 +34,13 @@ export default function App() {
 						<About />
 					</Route>
 					<Route path='/newgoal'>
-						<NewGoalForm token={token}/>
+						<NewGoalForm user={user}/>
 					</Route>
 					<Route path='/signup'>
-						<SignUp setToken={setToken}/>
+						<SignUp setUser={setUser}/>
 					</Route>
 					<Route path='/signin'>
-						<SignIn setToken={setToken}/>
+						<SignIn setUser={setUser}/>
 					</Route>
 					<Route path='/:id/feed'>
 						<Feed id=":id" />

@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 router.put('/', verify, async function (req, res, next) {
     res.send('Got a PUT request')
     const user = await User.findOne({email: req.body.email});
+    
 });
 
 module.exports = router;

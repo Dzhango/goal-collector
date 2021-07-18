@@ -67,8 +67,8 @@ export default function SignUp(props) {
 			params, { headers: headers 
 			}).then(function (response) {
 			
+			props.setUser(response);
 			setIsLoading(true);
-			props.setToken(response.data);
 
 			}).catch(function (error) {
 				alert(error.response.data);

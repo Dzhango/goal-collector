@@ -24,11 +24,6 @@ import {
 
 const axios = require('axios');
 
-const headers = {
-	'Content-Type': 'application/json',
-	"Access-Control-Allow-Origin": "*",
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -60,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const headers = {
+	'Content-Type': 'application/json',
+	"Access-Control-Allow-Origin": "*",
+}
 export default function SignIn(props) {
   const classes = useStyles();
 
@@ -76,17 +76,17 @@ export default function SignIn(props) {
 		axios.post('http://localhost:8000/signin', 
 			params, { headers: headers 
 			}).then(function (response) {
-			
+      
+      props.setUser(response);
 			setIsLoading(true);
-			props.setToken(response.data);
 
 			}).catch(function (error) {
-				alert(error.response.data);
+				alert(error);
 		});
   }
 
   if (isLoading){
-		return <Redirect to="/" />
+    return <Redirect to="/" />
 	}
 
   return (
