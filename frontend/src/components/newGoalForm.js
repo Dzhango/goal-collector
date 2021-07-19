@@ -17,7 +17,6 @@ import {
 const axios = require('axios');
 
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         //   marginBottom: theme.spacing(2),
     },
     link: {
-        display: "flex", 
+        display: "flex",
         justifyContent: "center",
         margin: "auto",
         width: "50%",
@@ -59,98 +58,111 @@ export default function NewGoalForm(props) {
     const headers = {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
-        "auth-token": props.user.token,
-        "email": props.user.login
+        "auth-token": window.localStorage.getItem("token"),
+        "email": window.localStorage.getItem("user")
     }
     function handleSubmit(event) {
-        // const params = {
-        //     Title: ""
+        event.preventDefault();
+        const params = {
+            Title: event.target[0].value,
+            Desc: event.target[2].value,
+            Attainable: event.target[4].value,
+            Measure: event.target[6].value,
+            Deadline: event.target[8].value,
+            Img: event.target[10].value
+        }
 
-        // }
-        console.dir(event.target[0])
 
-        // axios.put('http://localhost:8000/goals', 
-        // 	params, { headers: headers 
-        // 	}).then(function (response) {
+        axios.put('http://localhost:8000/goals', 
+        	params, { headers: headers 
+        	}).then(function (response) {
+            
+            console.log(response);
+        	// setIsLoading(true);
 
-        // 	setIsLoading(true);
-
-        // 	}).catch(function (error) {
-        // 		alert(error);
-        // });
+        	}).catch(function (error) {
+        		alert(error);
+        });
     }
 
-    if (isLoading) {
+    // if (isLoading) {
 
-    }
+    // }
 
     return (
         <div className={classes.root}>
             <Paper elevation={3} >
-                <form onSubmit={handleSubmit}> 
-                <div className={classes.title}>
-                    <TextField
-                        id="Title"
-                        variant="outlined"
-                        placeholder="Write the title of your goal"
-                        multiline
-                        rows={1}
-                        fullWidth
-                    />
-                </div>
-                <Container component="main" className={classes.main} maxWidth="lg">
-                    <TextField
-                        id="Desc"
-                        variant="outlined"
-                        placeholder="Describe what you are trying to achieve"
-                        multiline
-                        rows={8}
-                        fullWidth
-                    />
-                    <TextField
-                        id="Attainable"
-                        variant="outlined"
-                        placeholder="Is the goal attainable and why?"
-                        multiline
-                        rows={8}
-                        fullWidth
-                    />
-                    <TextField
-                        id="Measure"
-                        variant="outlined"
-                        placeholder="How are you going to measure your progress?"
-                        multiline
-                        rows={8}
-                        fullWidth
-                    />
-                    <TextField
-                        id="Values"
-                        variant="outlined"
-                        placeholder="How is the goal relevant in your life?"
-                        multiline
-                        rows={8}
-                        fullWidth
-                    />
-                    <TextField
-                        id="Deadline"
-                        variant="outlined"
-                        placeholder="When are you going to achieve the goal and how will you celebrate?"
-                        multiline
-                        rows={8}
-                        fullWidth
-                    />
-                </Container>
-                <div className={classes.link}>
-                    <TextField
-                            id="Img"
+                <form onSubmit={handleSubmit}>
+                    <div className={classes.title}>
+                        <TextField
+                            id="Title"
                             variant="outlined"
-                            placeholder="Paste a link to an image associated with the goal"
+                            label="Write the title of your goal"
                             multiline
                             rows={1}
                             fullWidth
-                    />
-                    <Button type="submit">Submit</Button>
-                </div>
+                            required
+                        />
+                    </div>
+                    <Container component="main" className={classes.main} maxWidth="lg">
+                        <TextField
+                            id="Desc"
+                            variant="outlined"
+                            label="Describe what you are trying to achieve?"
+                            multiline
+                            rows={8}
+                            fullWidth
+                            required
+                        />
+                        <TextField
+                            id="Attainable"
+                            variant="outlined"
+                            label="Is the goal attainable and why?"
+                            multiline
+                            rows={8}
+                            fullWidth
+                            required
+
+                        />
+                        <TextField
+                            id="Measure"
+                            variant="outlined"
+                            label="How are you going to measure your progress?"
+                            multiline
+                            rows={8}
+                            fullWidth
+                            required
+                        />
+                        <TextField
+                            id="Values"
+                            variant="outlined"
+                            label="How is the goal relevant in your life?"
+                            multiline
+                            rows={8}
+                            fullWidth
+                            required
+                        />
+                        <TextField
+                            id="Deadline"
+                            variant="outlined"
+                            label="When are you going to achieve the goal and how will you celebrate?"
+                            multiline
+                            rows={8}
+                            fullWidth
+                            required
+                        />
+                    </Container>
+                    <div className={classes.link}>
+                        <TextField
+                            id="Img"
+                            variant="outlined"
+                            label="Paste a link to an image associated with the goal"
+                            multiline
+                            rows={1}
+                            fullWidth
+                        />
+                        <Button type="submit">Submit</Button>
+                    </div>
                 </form>
             </Paper>
         </div>

@@ -9,11 +9,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 
-export default function MenuNav() {
+export default function MenuLogged(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -23,7 +24,13 @@ export default function MenuNav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    window.localStorage.clear();
+    props.setLogged(false);
+  };
+
   return (
     <div>
       <IconButton aria-controls="simple-menu" color="inherit" aria-haspopup="true" onClick={handleClick}>
@@ -35,19 +42,17 @@ export default function MenuNav() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      >     
-          <Link to="/" style={{ textDecoration: 'none', outline: "none" }} color="inherit">
-            <MenuItem onClick={handleClose}>Home</MenuItem>
-          </Link>
-          <Link to="/about" style={{ textDecoration: 'none', outline: "none" }} color="inherit">
-            <MenuItem onClick={handleClose}>About</MenuItem>
-          </Link>
-          <Link to="/signin" style={{ textDecoration: 'none', outline: "none" }} color="inherit">
-            <MenuItem onClick={handleClose}>My Account</MenuItem>
-          </Link>
-          <Link to="/signup" style={{ textDecoration: 'none', outline: "none" }} color="inherit">
-            <MenuItem onClick={handleClose}>Sign Up</MenuItem>
-          </Link>
+      >
+        <Link to='/' style={{ textDecoration: 'none', outline: "none" }}>
+          <MenuItem onClick={handleClose}>Home</MenuItem>
+        </Link>
+        <Link to='/about' style={{ textDecoration: 'none', outline: "none" }}>
+          <MenuItem onClick={handleClose}>About</MenuItem>
+        </Link>
+        <Link to='/signin' style={{ textDecoration: 'none', outline: "none" }}>
+          <MenuItem onClick={handleLogout}>Log out</MenuItem>
+        </Link>
+
       </Menu>
     </div>
   );

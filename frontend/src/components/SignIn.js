@@ -77,11 +77,13 @@ export default function SignIn(props) {
 			params, { headers: headers 
 			}).then(function (response) {
       
-      props.setUser(response);
+      window.localStorage.setItem('user', response.data.email);
+      window.localStorage.setItem('token', response.data.token);
+      props.setLogged(true);
 			setIsLoading(true);
 
 			}).catch(function (error) {
-				alert(error);
+				alert(error.response.data);
 		});
   }
 

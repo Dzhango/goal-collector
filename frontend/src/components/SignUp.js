@@ -67,8 +67,10 @@ export default function SignUp(props) {
 			params, { headers: headers 
 			}).then(function (response) {
 			
-			props.setUser(response);
+			window.localStorage.setItem('user', response.data.email);
+			window.localStorage.setItem('token', response.data.token);
 			setIsLoading(true);
+			props.setLogged(true);
 
 			}).catch(function (error) {
 				alert(error.response.data);
