@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }))
-export default function GoalCard(){
+export default function GoalCard(props){
 
     const classes = useStyles();
     return (
@@ -31,10 +31,10 @@ export default function GoalCard(){
             />
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Goal Title
+                    {props.card.Title}
                             </Typography>
                 <Typography>
-                    This is where goal description goes
+                    {props.card.Desc}
                             </Typography>
             </CardContent>
             <CardActions>

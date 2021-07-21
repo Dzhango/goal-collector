@@ -7,7 +7,7 @@ var loginRouter = require('./routes/login');
 var goalRouter = require("./routes/goals")
 const dotenv = require("dotenv");
 var cors = require('cors')
-
+const userpageRouter = require("./routes/userpage");
 
 dotenv.config();
 var app = express();
@@ -27,7 +27,7 @@ app.use('/home', indexRouter);
 app.use('/signup', signupRouter);
 app.use('/signin', loginRouter);
 app.use('/goals', goalRouter);
-
+app.use('/userpage', userpageRouter);
 
 
 // catch 404 and forward to error handler

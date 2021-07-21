@@ -68,8 +68,9 @@ export default function NewGoalForm(props) {
             Desc: event.target[2].value,
             Attainable: event.target[4].value,
             Measure: event.target[6].value,
-            Deadline: event.target[8].value,
-            Img: event.target[10].value
+            Values: event.target[8].value,
+            Deadline: event.target[10].value,
+            Img: event.target[12].value
         }
 
 

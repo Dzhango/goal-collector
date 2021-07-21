@@ -19,13 +19,19 @@ import {
 
 
 export default function App() {
-	const [user, setUser] = useState({});
-	
+	const [logged, setLogged] = useState(false);
+
+	useEffect(() => {
+		// Check if the user is logged
+		if(window.localStorage.getItem("user") !== null){
+			setLogged(true);
+		}
+	});
 	return (
 		<Router>
 			<React.Fragment>
 				<CssBaseline />
-				<Header /> 
+				<Header logged={logged} setLogged={setLogged}/> 
 				<Switch>
 					<Route path='/' exact>
 						<UserPage/>
@@ -34,16 +40,16 @@ export default function App() {
 						<About />
 					</Route>
 					<Route path='/newgoal'>
-						<NewGoalForm user={user}/>
+						<NewGoalForm/>
 					</Route>
 					<Route path='/signup'>
-						<SignUp setUser={setUser}/>
+						<SignUp setLogged={setLogged}/>
 					</Route>
 					<Route path='/signin'>
-						<SignIn setUser={setUser}/>
+						<SignIn setLogged={setLogged}/>
 					</Route>
-					<Route path='/:id/feed'>
-						<Feed id=":id" />
+					<Route path='/logout'>
+						<Feed />
 					</Route>
 				</Switch>
 				<Footer />

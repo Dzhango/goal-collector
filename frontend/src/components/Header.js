@@ -30,19 +30,19 @@ export default function Header(props) {
                         SMART Goals Library
                 </Typography>
                 </Typography>
-                
+
                 {/* //TODO */}
-                {props.logged
-                    ? <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        color="inherit"
-                      >
-                        <AccountCircle />
-                      </IconButton>
-                    : <Typography> Nothing</Typography>
-                }
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    {props.logged
+                        ? <AccountCircle/>
+                        : <AccountCircle visibility="hidden"/>
+                    }
+                </IconButton>
             </Toolbar>
         </AppBar>
     )

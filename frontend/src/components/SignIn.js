@@ -88,7 +88,7 @@ export default function SignIn(props) {
   }
 
   if (isLoading){
-    return <Redirect to="/" />
+    return <Redirect to="/userpage" />
 	}
 
   return (
