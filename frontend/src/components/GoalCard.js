@@ -26,7 +26,7 @@ export default function GoalCard(props){
         <Card className={classes.card}>
             <CardMedia
                 className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
+                image={props.card.Img}
                 title="Image title"
             />
             <CardContent className={classes.cardContent}>

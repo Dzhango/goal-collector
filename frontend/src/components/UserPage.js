@@ -16,7 +16,7 @@ const headers = {
     "Access-Control-Allow-Origin": "*"
 }
 
-export default function UserPage() {
+export default function UserPage(props) {
     const [goals, setGoals] = useState([]);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function UserPage() {
 
     return (
         <div>
-            <Hero />
+            <Hero logged={props.logged}/>
             <GoalGrid goals={goals}/>
         </div>
     )

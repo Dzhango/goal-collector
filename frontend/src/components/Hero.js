@@ -1,6 +1,6 @@
-import {Typography, Container, Button, makeStyles} from '@material-ui/core';
-import {Link} from "react-router-dom";
-  
+import { Typography, Container, Button, makeStyles } from '@material-ui/core';
+import { Link } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
     heroContent: {
         backgroundColor: theme.palette.background.paper,
@@ -17,29 +17,32 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         marginTop: theme.spacing(4),
     },
+    hidden: {
+        display: "none"
+    }
 }))
-export default function Hero(){
+export default function Hero(props) {
     const classes = useStyles();
 
     //make a put request here
     //create goals
-    return(
+    return (
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography variant="h5" align="center" color="standard" paragraph>
-            “To stand up straight with your shoulders back is 
-            to accept the terrible responsibility of life, with eyes wide open. 
-            It means deciding to voluntarily transform the chaos of potential 
-            into the realities of habitable order." - Jordan Peterson
+            <Container maxWidth="sm">
+                <Typography variant="h5" align="center" color="standard" paragraph>
+                    “To stand up straight with your shoulders back is
+                    to accept the terrible responsibility of life, with eyes wide open.
+                    It means deciding to voluntarily transform the chaos of potential
+                    into the realities of habitable order." - Jordan Peterson
             </Typography>
-            <div className={classes.heroButtons}>
-                <Link to="/newgoal">
-                    <Button variant="contained" color="primary" justify="center">
-                    Create New Goal 
-                    </Button>
-                </Link>
-            </div>
-          </Container>
+                <div className={props.logged ? classes.heroButtons : classes.hidden}>
+                    <Link to="/newgoal">
+                            <Button variant="contained" color="primary" justify="center">
+                                Create New Goal
+                            </Button>
+                    </Link>
+                </div>
+            </Container>
         </div>
     )
 }

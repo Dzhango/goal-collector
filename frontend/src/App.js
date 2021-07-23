@@ -34,7 +34,7 @@ export default function App() {
 				<Header logged={logged} setLogged={setLogged}/> 
 				<Switch>
 					<Route path='/' exact>
-						<UserPage/>
+						<UserPage logged={logged} />
 					</Route>
 					<Route path='/about'>
 						<About />

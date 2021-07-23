@@ -70,25 +70,25 @@ export default function NewGoalForm(props) {
             Measure: event.target[6].value,
             Values: event.target[8].value,
             Deadline: event.target[10].value,
-            Img: event.target[12].value
         }
 
 
-        axios.put('http://localhost:8000/goals', 
-        	params, { headers: headers 
-        	}).then(function (response) {
-            
-            console.log(response);
-        	// setIsLoading(true);
+        axios.put('http://localhost:8000/goals',
+            params, {
+                headers: headers
+        }).then(function (response) {
 
-        	}).catch(function (error) {
-        		alert(error);
+            console.log(response);
+            setIsLoading(true);
+
+        }).catch(function (error) {
+            alert(error);
         });
     }
 
-    // if (isLoading) {
-
-    // }
+    if (isLoading) {
+        return <Redirect to="/" />
+    }
 
     return (
         <div className={classes.root}>
@@ -153,15 +153,15 @@ export default function NewGoalForm(props) {
                             required
                         />
                     </Container>
-                    <div className={classes.link}>
-                        <TextField
+                     <div className={classes.link}>
+                        {/* <TextField
                             id="Img"
                             variant="outlined"
                             label="Paste a link to an image associated with the goal"
                             multiline
                             rows={1}
                             fullWidth
-                        />
+                        /> */}
                         <Button type="submit">Submit</Button>
                     </div>
                 </form>

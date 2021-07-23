@@ -7,6 +7,9 @@ var User = require("../models/User.js");
 router.post('/', async function(req, res, next) {
   const user = await User.findOne({email: req.body.email});
 
+  if (user === null){
+    // send random goals
+  }
 
   res.status(200).send(user.goals);
 });
