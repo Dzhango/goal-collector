@@ -28,6 +28,7 @@ app.use('/signup', signupRouter);
 app.use('/signin', loginRouter);
 app.use('/goals', goalRouter);
 app.use('/userpage', userpageRouter);
+app.use('/view', goalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -6,7 +6,7 @@ const { fetchUnsplash } = require("../fetchImg.js");
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  fetchUnsplash();
+  // fetchUnsplash();
   res.send({text: "hello axios"});
   
 });

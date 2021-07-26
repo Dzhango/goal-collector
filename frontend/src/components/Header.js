@@ -28,7 +28,7 @@ export default function Header(props) {
                 <Typography variant="h5" color="inherit" noWrap>
                     <Typography className={classes.header} color="inherit">
                         SMART Goals Library
-                </Typography>
+                    </Typography>
                 </Typography>
 
                 {/* //TODO */}
@@ -39,10 +39,15 @@ export default function Header(props) {
                     color="inherit"
                 >
                     {props.logged
-                        ? <AccountCircle/>
-                        : <AccountCircle visibility="hidden"/>
+                        ? <AccountCircle />
+                        : <AccountCircle visibility="hidden" />
                     }
                 </IconButton>
+                <Typography className={classes.header} color="inherit">
+                        {props.logged 
+                        ? window.localStorage.getItem("user") 
+                        : ""}
+                </Typography>
             </Toolbar>
         </AppBar>
     )

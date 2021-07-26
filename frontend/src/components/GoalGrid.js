@@ -21,8 +21,8 @@ export default function GoalGrid(props){
         <Container className={classes.cardGrid}>
           <Grid container spacing={4}>
             {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <GoalCard card={card}/>
+              <Grid item key={card._id} xs={12} sm={6} md={4}>
+                <GoalCard setGoal={props.setGoal} card={card} goals={props.goals}/>
               </Grid>
             ))}
           </Grid>

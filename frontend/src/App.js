@@ -10,23 +10,52 @@ import SignUp from './components/SignUp.js';
 import SignIn from './components/SignIn.js';
 import Feed from './components/Feed.js';
 import UserPage from './components/UserPage.js'; 
+import Goal from './components/Goal.js';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Link
 } from "react-router-dom";
+const axios = require("axios");
 
+
+const headers = {
+    'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*"
+}
 
 export default function App() {
 	const [logged, setLogged] = useState(false);
+	const [goals, setGoals] = useState([]);
+	const [goal, setGoal] = useState(null);
 
 	useEffect(() => {
 		// Check if the user is logged
 		if(window.localStorage.getItem("user") !== null){
 			setLogged(true);
+		} else {
+			setLogged(false);
+			setGoals([])
 		}
-	});
+	}, [window.localStorage.getItem("user")]);
+
+	useEffect(() => {
+		if (logged === true){
+			axios.post('http://localhost:8000/userpage',
+			{ email: window.localStorage.getItem("user") }, {
+			headers: headers
+			})
+			.then(function (response) {
+				setGoals(response.data);
+
+			}).catch(function (error) {
+				alert(error.response.data);
+			});
+		} 
+		//figure out how to chance goals, what do they depend on
+	}, [logged]);
+
 	return (
 		<Router>
 			<React.Fragment>
@@ -34,13 +63,13 @@ export default function App() {
 				<Header logged={logged} setLogged={setLogged}/> 
 				<Switch>
 					<Route path='/' exact>
-						<UserPage logged={logged} />
+						<UserPage setGoal={setGoal} logged={logged} goals={goals} />
 					</Route>
 					<Route path='/about'>
 						<About />
 					</Route>
 					<Route path='/newgoal'>
-						<NewGoalForm/>
+						<NewGoalForm goal={goal} goals={goals} setGoals={setGoals}/>
 					</Route>
 					<Route path='/signup'>
 						<SignUp setLogged={setLogged}/>
@@ -50,6 +79,9 @@ export default function App() {
 					</Route>
 					<Route path='/logout'>
 						<Feed />
+					</Route>
+					<Route path='/goal'>
+						<Goal goals={goals}/>
 					</Route>
 				</Switch>
 				<Footer />

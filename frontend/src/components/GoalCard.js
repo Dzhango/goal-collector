@@ -5,6 +5,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+    Link
+} from "react-router-dom";
+const axios = require("axios");
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -19,9 +28,40 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
 }))
-export default function GoalCard(props){
-
+export default function GoalCard(props) {
     const classes = useStyles();
+
+    const headers = {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "auth-token": window.localStorage.getItem("token"),
+        "email": window.localStorage.getItem("user")
+    }
+    const [view, setView] = useState(false);
+    
+    const handleClick = (event) => {
+        event.preventDefault();
+        const params = {
+            Title: props.card.Title
+        }
+
+        axios.post('http://localhost:8000/goals/goal',
+            params, {
+            headers: headers
+        }).then(function (response) {
+
+            console.log(response);
+            props.setGoal(response.data);
+            setView(true);
+
+        }).catch(function (error) {
+            alert(error);
+        });
+    }
+    if (view) {
+        return <Redirect to="/newgoal" />
+    }
+
     return (
         <Card className={classes.card}>
             <CardMedia
@@ -32,18 +72,20 @@ export default function GoalCard(props){
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
                     {props.card.Title}
-                            </Typography>
+                </Typography>
                 <Typography>
                     {props.card.Desc}
-                            </Typography>
+                </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    View
-                            </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={handleClick}>
                     Edit
-                            </Button>
+                </Button>
+                <Link to="/goal">
+                    <Button size="small" color="primary">
+                        Delete
+                    </Button>
+                </Link>
             </CardActions>
         </Card>
     )

@@ -16,7 +16,6 @@ import {
 
 const axios = require('axios');
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
@@ -51,48 +50,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function NewGoalForm(props) {
+export default function Goal(props) {
     const classes = useStyles();
-    const [view, setView] = useState(false);
-    
-    const headers = {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "auth-token": window.localStorage.getItem("token"),
-        "email": window.localStorage.getItem("user")
-    }
-    function handleSubmit(event) {
-        event.preventDefault();
-        const params = {
-            Title: event.target[0].value,
-            Desc: event.target[2].value,
-            Attainable: event.target[4].value,
-            Measure: event.target[6].value,
-            Values: event.target[8].value,
-            Deadline: event.target[10].value,
+
+    let text = {}
+    props.goals.find((goal) => {
+        if (goal.clicked) {
+            text = { ...goal }
         }
+    })
 
-        axios.put('http://localhost:8000/goals',
-            params, {
-                headers: headers
-        }).then(function (response) {
-
-            console.log(response);
-            props.setGoals(response.data);
-            setView(true);
-
-        }).catch(function (error) {
-            alert(error);
-        });
-    }
-    if (view){
-        return <Redirect to="/"/>
-    }
 
     return (
         <div className={classes.root}>
             <Paper elevation={3} >
-                <form onSubmit={handleSubmit}>
+                <form >
                     <div className={classes.title}>
                         <TextField
                             id="Title"
@@ -102,7 +74,7 @@ export default function NewGoalForm(props) {
                             rows={1}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Title: ""}
+                            defaultValue={text.Title}
                         />
                     </div>
                     <Container component="main" className={classes.main} maxWidth="lg">
@@ -114,8 +86,7 @@ export default function NewGoalForm(props) {
                             rows={8}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Desc: ""}
-
+                            defaultValue={text.Desc}
                         />
                         <TextField
                             id="Attainable"
@@ -125,8 +96,7 @@ export default function NewGoalForm(props) {
                             rows={8}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Attainable: ""}
-
+                            defaultValue={text.Attainable}
                         />
                         <TextField
                             id="Measure"
@@ -136,7 +106,7 @@ export default function NewGoalForm(props) {
                             rows={8}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Measure: ""}
+                            defaultValue={text.Measure}
                         />
                         <TextField
                             id="Values"
@@ -146,7 +116,7 @@ export default function NewGoalForm(props) {
                             rows={8}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Values: ""}
+                            defaultValue={text.Value}
                         />
                         <TextField
                             id="Deadline"
@@ -156,22 +126,11 @@ export default function NewGoalForm(props) {
                             rows={8}
                             fullWidth
                             required
-                            defaultValue={props.goal !== null? props.goal.Deadline: ""}
+                            defaultValue={text.Deadline}
                         />
                     </Container>
-                     <div className={classes.link}>
-                        {/* <TextField
-                            id="Img"
-                            variant="outlined"
-                            label="Paste a link to an image associated with the goal"
-                            multiline
-                            rows={1}
-                            fullWidth
-                        /> */}
-                        <Button type="submit">Submit</Button>
-                    </div>
                 </form>
             </Paper>
         </div>
-    );
+            );
 }

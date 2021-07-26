@@ -18,15 +18,15 @@ const fetchUnsplash = (title) => {
         query: title,
         orientation: "landscape"
     }
-    // let url = ""
 
     return unsplash.search
         .getPhotos(params)
         .then(result => {
             return result.response.results[0].urls.small;
         })
-        .catch(() => {
-            console.log('something went wrong!');
+        .catch((error) => {
+            console.log(error);
+            return ""
         })
 
     // return url;
