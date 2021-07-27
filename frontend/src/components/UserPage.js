@@ -14,8 +14,8 @@ export default function UserPage(props) {
 
     return (
         <div>
-            <Hero logged={props.logged}/>
-            <GoalGrid setGoal={props.setGoal} goals={props.goals}/>
+            <Hero logged={props.logged} setGoal={props.setGoal}/>
+            <GoalGrid setGoal={props.setGoal} goals={props.goals} setLogged={props.setLogged}/>
         </div>
     )
 }

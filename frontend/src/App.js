@@ -10,7 +10,7 @@ import SignUp from './components/SignUp.js';
 import SignIn from './components/SignIn.js';
 import Feed from './components/Feed.js';
 import UserPage from './components/UserPage.js'; 
-import Goal from './components/Goal.js';
+import GoalView from './components/GoalView.js';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -54,7 +54,7 @@ export default function App() {
 			});
 		} 
 		//figure out how to chance goals, what do they depend on
-	}, [logged]);
+	}, [logged, goals]);
 
 	return (
 		<Router>
@@ -63,13 +63,13 @@ export default function App() {
 				<Header logged={logged} setLogged={setLogged}/> 
 				<Switch>
 					<Route path='/' exact>
-						<UserPage setGoal={setGoal} logged={logged} goals={goals} />
+						<UserPage setGoal={setGoal} logged={logged} goals={goals} setLogged={setLogged}/>
 					</Route>
 					<Route path='/about'>
 						<About />
 					</Route>
 					<Route path='/newgoal'>
-						<NewGoalForm goal={goal} goals={goals} setGoals={setGoals}/>
+						<NewGoalForm goal={goal} setGoal={setGoal} goals={goals} setGoals={setGoals}/>
 					</Route>
 					<Route path='/signup'>
 						<SignUp setLogged={setLogged}/>
@@ -81,7 +81,7 @@ export default function App() {
 						<Feed />
 					</Route>
 					<Route path='/goal'>
-						<Goal goals={goals}/>
+						<GoalView goal={goal}/>
 					</Route>
 				</Switch>
 				<Footer />

@@ -22,7 +22,7 @@ export default function GoalGrid(props){
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card._id} xs={12} sm={6} md={4}>
-                <GoalCard setGoal={props.setGoal} card={card} goals={props.goals}/>
+                <GoalCard setGoal={props.setGoal} card={card} goals={props.goals} setLogged={props.setLogged}/>
               </Grid>
             ))}
           </Grid>

@@ -11,43 +11,53 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
     header: {
-        marginLeft: theme.spacing(2)
+        display: "block",
+        float: "right",
+        padding: "12px"
     },
+    toolbar: {
+        display: "flex",
+        justifyContent: "space-between"
+    },
+    icon: {
+        display: "inline-block",
+        padding: "12px", 
+        // marginLeft: "60%"
+    },
+    flexItems: {
+        verticalAlign: "text-bottom"
+    }
 }))
 
 export default function Header(props) {
     const classes = useStyles();
     return (
         <AppBar position="relative">
-            <Toolbar>
-                {props.logged
-                    ? <MenuLogged setLogged={props.setLogged} />
-                    : <Menu />
-                }
-                {/* <CameraIcon className={classes.icon} /> */}
-                <Typography variant="h5" color="inherit" noWrap>
-                    <Typography className={classes.header} color="inherit">
-                        SMART Goals Library
-                    </Typography>
-                </Typography>
-
-                {/* //TODO */}
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
+            <Toolbar className={classes.toolbar}>
+                <div className={classes.flexItems}>
                     {props.logged
-                        ? <AccountCircle />
-                        : <AccountCircle visibility="hidden" />
+                        ? <MenuLogged setLogged={props.setLogged} className={classes.items} />
+                        : <Menu className={classes.items}/>
                     }
-                </IconButton>
-                <Typography className={classes.header} color="inherit">
-                        {props.logged 
-                        ? window.localStorage.getItem("user") 
-                        : ""}
-                </Typography>
+                    {/* <CameraIcon className={classes.icon} /> */}
+                
+                    <Typography color="inherit" noWrap className={classes.flexItems}>
+                        <Typography  variant="h5"color="inherit">
+                            SMART Goals Library
+                        </Typography>
+                    </Typography>
+                </div>
+                <div className={classes.flexItems}>
+                    {props.logged
+                        ? <div className={classes.icon}> <AccountCircle/> </div>
+                        : <AccountCircle visibility="hidden"/>
+                    }
+                    <Typography className={classes.header} color="inherit">
+                        {props.logged
+                            ? window.localStorage.getItem("user")
+                            : ""}
+                    </Typography>
+                </div>
             </Toolbar>
         </AppBar>
     )

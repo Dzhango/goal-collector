@@ -38,28 +38,39 @@ export default function GoalCard(props) {
         "email": window.localStorage.getItem("user")
     }
     const [view, setView] = useState(false);
-    
+
     const handleClick = (event) => {
+        event.preventDefault();
+
+        for (let i = 0; i < props.goals.length; i++) {
+            if (props.goals[i].Title === props.card.Title) {
+                props.setGoal(props.goals[i]);
+                setView(true);
+            }
+        }
+
+
+    }
+
+    const handleDelete = (event) => {
         event.preventDefault();
         const params = {
             Title: props.card.Title
         }
-
-        axios.post('http://localhost:8000/goals/goal',
+        axios.post('http://localhost:8000/goals/goal/delete',
             params, {
             headers: headers
         }).then(function (response) {
 
             console.log(response);
-            props.setGoal(response.data);
-            setView(true);
+            props.setGoal(null);
 
         }).catch(function (error) {
             alert(error);
         });
     }
     if (view) {
-        return <Redirect to="/newgoal" />
+        return <Redirect to="/goal" />
     }
 
     return (
@@ -79,10 +90,10 @@ export default function GoalCard(props) {
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleClick}>
-                    Edit
+                    View
                 </Button>
                 <Link to="/goal">
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={handleDelete} >
                         Delete
                     </Button>
                 </Link>

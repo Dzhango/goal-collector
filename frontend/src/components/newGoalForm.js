@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NewGoalForm(props) {
     const classes = useStyles();
     const [view, setView] = useState(false);
-    
+
     const headers = {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
@@ -79,12 +79,42 @@ export default function NewGoalForm(props) {
 
             console.log(response);
             props.setGoals(response.data);
+            props.setGoal(null)
             setView(true);
 
         }).catch(function (error) {
             alert(error);
         });
     }
+    function handleEdit(event){
+        event.preventDefault();
+        const params = {
+            _id: props.goal._id, 
+            Title: event.target[0].value,
+            Desc: event.target[2].value,
+            Attainable: event.target[4].value,
+            Measure: event.target[6].value,
+            Values: event.target[8].value,
+            Deadline: event.target[10].value,
+            Img : props.goal.Img
+        }
+
+        axios.post('http://localhost:8000/goals/goal/edit',
+            params, {
+                headers: headers
+        }).then(function (response) {
+
+            console.log(response);
+            props.setGoals(response.data);
+            props.setGoal(null)
+            setView(true);
+
+        }).catch(function (error) {
+            alert(error);
+        });
+    }
+
+
     if (view){
         return <Redirect to="/"/>
     }
@@ -92,7 +122,7 @@ export default function NewGoalForm(props) {
     return (
         <div className={classes.root}>
             <Paper elevation={3} >
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={props.goal === null ? handleSubmit : handleEdit}>
                     <div className={classes.title}>
                         <TextField
                             id="Title"

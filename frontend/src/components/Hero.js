@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Hero(props) {
     const classes = useStyles();
 
+    const handleClick = (event) => {
+        props.setGoal(null); 
+    }
+
     //make a put request here
     //create goals
     return (
@@ -37,7 +41,7 @@ export default function Hero(props) {
             </Typography>
                 <div className={props.logged ? classes.heroButtons : classes.hidden}>
                     <Link to="/newgoal">
-                            <Button variant="contained" color="primary" justify="center">
+                            <Button variant="contained" color="primary" justify="center" onClick={handleClick}>
                                 Create New Goal
                             </Button>
                     </Link>

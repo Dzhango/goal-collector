@@ -18,9 +18,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
   },
   main: {
+    // width: "30%",
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginLeft: theme.spacing(8)
+  },
+  caption: {
+    // In Chinese and Japanese the characters are usually larger,
+    // so a smaller fontsize may be appropriate.
+    fontSize: 20,
+    fontStyle: "italic"
   },
 }));
 
@@ -31,11 +39,9 @@ export default function About() {
     <div className={classes.root}>
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="sm">
-        <Typography variant="h2" component="h1" gutterBottom>
-          Goal Sharing
-        </Typography>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {'Being young and ambitious, I have always had more goals than I have time or energy to accomplish. This is a passion project dedicated to all the unfulfilled and postponed goals you ever had.'}
+        <Typography variant="caption" component="h2" gutterBottom className={classes.caption}>
+          {'I always had more goals than what could be accomplshed in a lifetime.'}
+          {'This is a passion project dedicated to all the unfulfilled or postponed goals you ever had.'}
         </Typography>
         <Typography variant="body1">Dzhangir Bayandarov</Typography>
       </Container>
