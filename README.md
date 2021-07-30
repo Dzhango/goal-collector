@@ -6,8 +6,9 @@ FullStack web application to collect your goals and share your goals.
 This was built on the MERN stack with JWT authentication. 
 
 ## Home Page
-![alt text](https://github.com/[Dzhango]/[goal-collector]/blob/[main]/home.png?raw=true)
+![Alt text](./home.png?raw=true "Home Page")
 
 ## Sign-in page
-![alt text](https://github.com/[Dzhango]/[goal-collector]/blob/[main]/signin.png?raw=true)
+![Alt text](./signin.png?raw=true "Sign-in Page")
+
 
