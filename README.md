@@ -1,9 +1,5 @@
 # Smart Goal Library
-FullStack web application to collect your goals and share your goals.
-
-## What is this?
-
-This was built on the MERN stack with JWT authentication. 
+FullStack web application to collect your goals and share your goals. Built on the MERN stack with JWT authentication. 
 
 ## Home Page
 ![Alt text](./home.png?raw=true "Home Page")
