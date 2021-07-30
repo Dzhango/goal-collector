@@ -84,7 +84,6 @@ export default function App() {
 						<GoalView goal={goal}/>
 					</Route>
 				</Switch>
-				<Footer />
 			</React.Fragment>
 		</Router>
 	);

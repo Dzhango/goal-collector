@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     header: {
         display: "block",
         float: "right",
-        padding: "12px"
+        padding: "12px",
+        paddingLeft: "6px"
     },
     toolbar: {
         display: "flex",
@@ -21,11 +22,18 @@ const useStyles = makeStyles((theme) => ({
     },
     icon: {
         display: "inline-block",
-        padding: "12px", 
+        padding: "12px",
+        paddingRight: "0" 
         // marginLeft: "60%"
     },
     flexItems: {
-        verticalAlign: "text-bottom"
+        // flex:
+    },
+    menu : {
+        width: "238px",
+    },
+    title: {
+        float: "right"
     }
 }))
 
@@ -34,19 +42,18 @@ export default function Header(props) {
     return (
         <AppBar position="relative">
             <Toolbar className={classes.toolbar}>
-                <div className={classes.flexItems}>
+                <div className={classes.menu}>
                     {props.logged
                         ? <MenuLogged setLogged={props.setLogged} className={classes.items} />
                         : <Menu className={classes.items}/>
                     }
                     {/* <CameraIcon className={classes.icon} /> */}
-                
-                    <Typography color="inherit" noWrap className={classes.flexItems}>
-                        <Typography  variant="h5"color="inherit">
+                </div>
+                    <Typography color="inherit" Wrap className={classes.flexItems}>
+                        <Typography  variant="h6"color="inherit">
                             SMART Goals Library
                         </Typography>
                     </Typography>
-                </div>
                 <div className={classes.flexItems}>
                     {props.logged
                         ? <div className={classes.icon}> <AccountCircle/> </div>

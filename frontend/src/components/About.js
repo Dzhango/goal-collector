@@ -40,7 +40,7 @@ export default function About() {
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="sm">
         <Typography variant="caption" component="h2" gutterBottom className={classes.caption}>
-          {'I always had more goals than what could be accomplshed in a lifetime.'}
+          {'I always had more goals than I could accomplshed in a lifetime.'}
           {'This is a passion project dedicated to all the unfulfilled or postponed goals you ever had.'}
         </Typography>
         <Typography variant="body1">Dzhangir Bayandarov</Typography>

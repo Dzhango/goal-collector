@@ -1,19 +1,12 @@
-# Full Stack Template
-
-The essential full stack template for any hackathon, just the basics.
+# Smart Goal Library
+FullStack web application to collect your goals and share your goals.
 
 ## What is this?
 
-This is a template repository that you can use to build any full stack app, whether it's for a hackathon, side project, or the next Airbnb.
+This was built on the MERN stack with JWT authentication. 
 
-## Stack
+## Home Page
+![alt text](./home)
 
-For the backend, this uses a barebones express setup, and the frontend uses a barebones express setup.
-
-## Backend Docs
-
-All routes are documented with [Postman](https://documenter.getpostman.com/view/12316934/TVsoFprj)
-
-## Goal Collector App
-
-Collection of all the SMART goals you ever had
+## Sign-in page
+![alt text](./signin)

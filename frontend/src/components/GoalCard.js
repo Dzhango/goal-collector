@@ -92,11 +92,9 @@ export default function GoalCard(props) {
                 <Button size="small" color="primary" onClick={handleClick}>
                     View
                 </Button>
-                <Link to="/goal">
-                    <Button size="small" color="primary" onClick={handleDelete} >
-                        Delete
-                    </Button>
-                </Link>
+                <Button size="small" color="primary" onClick={handleDelete} >
+                    Delete
+                </Button>
             </CardActions>
         </Card>
     )

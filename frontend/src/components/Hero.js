@@ -19,13 +19,16 @@ const useStyles = makeStyles((theme) => ({
     },
     hidden: {
         display: "none"
+    },
+    author: {
+        fontStyle: "italic"
     }
 }))
 export default function Hero(props) {
     const classes = useStyles();
 
     const handleClick = (event) => {
-        props.setGoal(null); 
+        props.setGoal(null);
     }
 
     //make a put request here
@@ -37,12 +40,13 @@ export default function Hero(props) {
                     “To stand up straight with your shoulders back is
                     to accept the terrible responsibility of life, with eyes wide open.
                     It means deciding to voluntarily transform the chaos of potential
-                    into the realities of habitable order." - Jordan Peterson
-            </Typography>
+                        into the realities of habitable order."
+                    <span className={classes.author}>- Jordan Peterson</span>
+                </Typography>
                 <div className={props.logged ? classes.heroButtons : classes.hidden}>
                     <Link to="/newgoal">
-                            <Button variant="contained" color="primary" justify="center" onClick={handleClick}>
-                                Create New Goal
+                        <Button variant="contained" color="primary" justify="center" onClick={handleClick}>
+                            Create New Goal
                             </Button>
                     </Link>
                 </div>

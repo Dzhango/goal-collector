@@ -9,6 +9,8 @@ const dotenv = require("dotenv");
 var cors = require('cors')
 const userpageRouter = require("./routes/userpage");
 
+var path = require('path');
+
 dotenv.config();
 var app = express();
 
@@ -16,6 +18,12 @@ var app = express();
 const uri = process.env.DB_CONNECT;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
 	console.log("connected to DB");
+});
+
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
 });
 
 //Middleware
